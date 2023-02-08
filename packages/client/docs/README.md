@@ -61,6 +61,8 @@ export default {
 
 ```
 
+There is already an example configuration in `./config.js`, change it to your address to test out.
+
 ### Run!
 
 Simply type:
