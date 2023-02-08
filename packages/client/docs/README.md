@@ -55,8 +55,9 @@ export default {
 
     // DB Path
     LEVEL_PATH: "Path/to/db/folder" /* This is the place where every account data is stored */,
-    LOG_PATH: "Path/to/log/file" /* This is the place where the current block synced is stored */
-
+    LOG_PATH: "Path/to/log/file" /* This is the place where the current block synced is stored */,
+    
+    FIRST_MINT_ADDR: "0x41ae2cCd276B76758bF6b3D272F014d19E68D45D"
 }
 
 ```
