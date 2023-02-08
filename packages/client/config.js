@@ -26,5 +26,7 @@ export default {
 
     // DB Path
     LEVEL_PATH: "C:/Users/npqua/desktop/leveldb",
-    LOG_FILE: "C:/Users/npqua/desktop/log"
+    LOG_FILE: "C:/Users/npqua/desktop/log",
+
+    FIRST_MINT_ADDR: "0x41ae2cCd276B76758bF6b3D272F014d19E68D45D",
 }

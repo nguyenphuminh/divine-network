@@ -29,7 +29,8 @@ const {
     PORT,
     RPC_PORT,
     LEVEL_PATH,
-    LOG_FILE
+    LOG_FILE,
+    FIRST_MINT_ADDR
 } = config;
 
 const token = TOKEN;
@@ -41,10 +42,11 @@ const myAccount = algosdk.mnemonicToSecretKey(MNEMONIC);
 
 const common = new Common({ chain: Chain.Mainnet, hardfork: Hardfork.Berlin });
 
-const trie = new Trie({
+const trie = await Trie.create({
     db: new LevelDB(new Level(LEVEL_PATH)),
     useKeyHashing: true,
-});
+    useRootPersistence: true,
+})
 
 const stateManager = new DefaultStateManager({ trie });
 
@@ -66,6 +68,14 @@ let counter;
 
 if (!fs.existsSync(LOG_FILE)) {
     counter = START_SYNC;
+
+    // Initial coin mint
+    const address = new Address(Buffer.from(FIRST_MINT_ADDR.slice(2), 'hex'));
+    const account = new Account(0n, 10000000000000000000000000n);
+    await vm.stateManager.checkpoint();
+    await vm.stateManager.putAccount(address, account);
+    await vm.stateManager.commit();
+    await vm.stateManager.flush();
 } else {
     counter = parseInt(fs.readFileSync(LOG_FILE));
 }
